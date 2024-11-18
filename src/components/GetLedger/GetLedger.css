@@ -1,0 +1,137 @@
+.get-ledger-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Adjust spacing between components */
+    align-items: center;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 1200px; /* Restrict maximum width for consistency */
+  }
+  
+  /* Styling for Bank ID input */
+  .bank-id-input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px; /* Spacing between label and input */
+    width: 100%;
+    max-width: 500px;
+    color: #4A4A4A;
+  }
+  
+  .bank-id-input label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .bank-id-input input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling for filters */
+  .filters {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    margin-top: 10px;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  /* Styling for PageSize and Pagination components */
+  .page-size,
+  .pagination {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Table container styling */
+  .table-container {
+    width: 100%; /* Ensure table takes full available space */
+    margin: 20px auto;
+    overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
+    padding: 0; /* Remove padding around the table */
+  }
+  
+  /* Remove any background layer behind the table */
+  .table-container::before,
+  .table-container::after {
+    content: '';
+    display: none;
+  }
+  
+  /* Table styling */
+  .custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #F5FFFA;
+    border-radius: 0; /* Remove border radius */
+    border: 1px solid #ddd;
+    table-layout: auto; /* Adjust columns based on content */
+    box-shadow: none; /* Remove any shadow around the table */
+  }
+  
+  /* Header styling */
+  .custom-table-header {
+    background-color: #008080;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: capitalize;
+    border: 1px solid #ddd;
+    white-space: nowrap; /* Prevent header text wrapping */
+  }
+  
+  /* Cell styling */
+  .custom-table-cell {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 13px;
+    color: #4A4A4A;
+    white-space: nowrap; /* Keep content in a single line */
+    overflow: hidden; /* Hide overflowed text */
+    text-overflow: ellipsis; /* Add ellipsis for overflowed content */
+  }
+  
+  /* Adjust rows for readability */
+  .custom-table-row:nth-child(even) {
+    background-color: #E8F5F5;
+  }
+  
+  .custom-table-row:nth-child(odd) {
+    background-color: #F5FFFA;
+  }
+  
+  .custom-table-row:hover {
+    background-color: #DFF5F5;
+    cursor: pointer;
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .filters,
+    .bank-id-input {
+      max-width: 90%;
+    }
+  
+    .custom-table {
+      font-size: 12px;
+    }
+  
+    .custom-table-header,
+    .custom-table-cell {
+      padding: 8px;
+    }
+  }
+  

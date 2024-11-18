@@ -1,0 +1,81 @@
+.login-container {
+    background: linear-gradient(to bottom right, #113157, #1A3D64, #0A2538);
+    color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    width: 350px;
+    text-align: center;
+    position: relative;
+}
+
+
+.login-title {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #FFD700;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+ 
+.input-container {
+    margin-bottom: 20px;
+}
+
+ 
+.login-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+    border: 1px solid #1A3D64;
+    border-radius: 8px;
+    background: #0A2538;
+    color: #fff;
+    outline: none;
+}
+
+.login-input::placeholder {
+    color: #aaa;
+}
+
+ 
+.password-container {
+    position: relative;
+}
+
+.eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #FFD700;
+    font-size: 1.5em;
+}
+
+ 
+.login-btn, .cancel-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.login-btn {
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    color: #fff;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+
+

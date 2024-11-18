@@ -1,0 +1,126 @@
+/* General Container Styling */
+.delete-bank-container {
+    margin: 50px auto;
+    padding: 50px;
+    width: 40%; /* Maintained wider width */
+    max-width: 800px; /* Limit the maximum width */
+    background-color: #f5fffa;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow for better focus */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 1s ease-in-out;
+    padding-left: 20px; /* Added left padding */
+    padding-right: 20px; /* Added right padding */
+  }
+  
+  /* Heading Styling */
+  .delete-bank-heading {
+    font-size: 36px; /* Adjusted font size */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 3px solid #ff3333; /* Accent under the heading */
+    display: inline-block;
+    padding-bottom: 10px;
+    white-space: nowrap; /* Ensure the heading remains in one line */
+  }
+  
+  /* Form Styling */
+  .delete-bank-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Consistent spacing between form elements */
+    width: 100%;
+  }
+  
+  /* Input Group Styling */
+  .input-group {
+    text-align: left;
+    width: 100%; /* Ensure inputs occupy full width */
+  }
+  
+  /* Label Styling */
+  .input-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #555;
+  }
+  
+  /* Input Field Styling */
+  .form-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px; /* Increased font size */
+    color: #000; /* Black text for better visibility */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .form-input:focus {
+    border-color: #ff3333; /* Match with button accent */
+    outline: none;
+    background-color: #fff;
+  }
+  
+  /* Button Styling */
+  .delete-bank-button {
+    padding: 14px 40px; /* Increased padding for a bigger button */
+    font-size: 18px; /* Larger font size */
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(90deg, #ff3333, #cc0000); /* Gradient button */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .delete-bank-button:hover {
+    background: linear-gradient(90deg, #cc0000, #990000);
+    transform: scale(1.05);
+  }
+  
+  /* Add subtle fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+    .delete-bank-container {
+      width: 90%; /* Full width for smaller screens */
+      padding: 30px;
+    }
+  
+    .delete-bank-heading {
+      font-size: 28px;
+    }
+  
+    .form-input,
+    .delete-bank-button {
+      font-size: 14px;
+    }
+  
+    .delete-bank-button {
+      padding: 12px 20px;
+    }
+  }
+  

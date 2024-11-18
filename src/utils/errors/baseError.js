@@ -1,0 +1,13 @@
+import { StatusCodes } from "http-status-codes";
+
+class BankAppError extends Error{
+    constructor(httpStatusCode,name,message,specificMessage){
+        super(specificMessage)
+        this.httpStatusCode = httpStatusCode
+        this.name = name
+        this.message = message
+        
+    }
+}
+
+export default BankAppError
