@@ -1,0 +1,133 @@
+/* KYC Component Styles */
+.kyc-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .back-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    text-decoration: none;
+  }
+  
+  .back-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .kyc-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .kyc-status {
+    margin-bottom: 20px;
+  }
+  
+  .kyc-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  /* General Table Header and Column Styling */
+  .kyc-table th, .kyc-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+  
+  /* Table Header Styling */
+  .kyc-table th {
+    background-color: #008080;  /* Match standard table header color */
+    color: white;  /* White text on the header */
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  
+  /* Table Column Styling */
+  .kyc-table td {
+    color: #4A4A4A;  /* Darker text color for better visibility */
+    font-size: 13px;
+    background-color: #F5FFFA;  /* Match standard table column background */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  /* Add ellipsis for overflowed content */
+  }
+  
+  /* Styling for even and odd rows */
+  .kyc-table tr:nth-child(even) {
+    background-color: #E8F5F5;  /* Slightly lighter background for even rows */
+  }
+  
+  .kyc-table tr:nth-child(odd) {
+    background-color: #F5FFFA;  /* Slightly lighter background for odd rows */
+  }
+  
+  /* Hover effect on rows */
+  .kyc-table tr:hover {
+    background-color: #DFF5F5;  /* Hover background color */
+    cursor: pointer;
+  }
+  
+  /* KYC Document Section */
+  .kyc-document {
+    margin-bottom: 20px;
+  }
+  
+  .kyc-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Upload Section */
+  .upload-section {
+    margin-top: 20px;
+  }
+  
+  .upload-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .upload-button:hover {
+    background-color: #218838;
+  }
+  
+  /* File Input Styling */
+  input[type="file"] {
+    margin-top: 10px;
+    color: gray;
+  }
+  
+  h2, h4 {
+    color: #333;  /* Darker text for headers */
+  }
+  
+  h3, p {
+    color: #555;  /* Slightly lighter for general text */
+  }
+  
+  /* Style for empty admin note section */
+  .kyc-status td {
+    color: #777; /* Gray for empty values */
+  }
+  

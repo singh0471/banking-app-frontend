@@ -24,7 +24,7 @@ const GetAllUsers = () => {
         });
         console.log(response);
         if (response.data.length > 0) {
-            const updatedRespond = selectTableAttribute(response.data,['id','username','firstName','lastName','totalBalance','createdAt','updatedAt']);
+            const updatedRespond = selectTableAttribute(response.data,['id','username','email','firstName','lastName','dateOfBirth','totalBalance']);
           setHeader(Object.keys(updatedRespond[0]));  
           setUserData(updatedRespond);  
           console.log(updatedRespond);

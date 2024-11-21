@@ -24,7 +24,7 @@ const GetLedger = () => {
         limit: pageSize
       });
       if (response.data.length > 0) {
-        const updatedData = selectTableAttribute(response.data, ['bankId','anotherBankId','netBalance'])
+        const updatedData = selectTableAttribute(response.data, ['bankName','anotherBankName','netBalance'])
         setHeader(Object.keys(updatedData[0]));  
         setLedgerData(updatedData);  
         setTotalPages(

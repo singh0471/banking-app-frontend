@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
-import updateBankService from '../../services/updateBankService'; // Assume this service is created
+import updateBankService from '../../services/updateBankService';  
 import './UpdateBank.css';
 
 const UpdateBank = () => {
   const [bankId, setBankId] = useState('');
-  const [updates, setUpdates] = useState([{ parameter: '', value: '' }]); // Initial single update option
+  const [updates, setUpdates] = useState([{ parameter: '', value: '' }]);  
   const allParameters = ['name', 'abbreviation'];
 
-  // Handle adding a new update option
+ 
   const addUpdateOption = () => {
     if (updates.length < 3) {
       setUpdates([...updates, { parameter: '', value: '' }]);
     }
   };
 
-  // Handle removing an update option
+  
   const removeUpdateOption = (index) => {
     setUpdates(updates.filter((_, i) => i !== index));
   };
 
-  // Handle change in update fields
+  
   const handleUpdateChange = (index, field, value) => {
     const newUpdates = [...updates];
     newUpdates[index][field] = value;
     setUpdates(newUpdates);
   };
 
-  // Fetch available parameters for the dropdown
+   
   const getAvailableParameters = (index) => {
     const selectedParameters = updates.map((update) => update.parameter);
     return allParameters.filter(
@@ -35,18 +35,18 @@ const UpdateBank = () => {
     );
   };
 
-  // Submit handler for updating the bank
+   
   const handleUpdateBank = async (event) => {
     event.preventDefault();
 
     try {
         console.log(updates)
-      for (const update of updates) {
-        if (update.parameter && update.value) {
-          const response = await updateBankService(bankId, update.parameter, update.value);
-          console.log(`Updated ${update.parameter}:`, response);
+     
+        if (updates) {
+          const response = await updateBankService(bankId, updates);
+          
         }
-      }
+      
       alert('Bank updated successfully!');
     } catch (error) {
       console.error('Error updating bank:', error);

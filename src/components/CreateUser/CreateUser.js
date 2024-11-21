@@ -2,24 +2,24 @@ import React, { useState } from 'react';
 import createUserService from '../../services/createUserService'; // Import the user creation service
 import './CreateUser.css';
 
-
 const CreateUser = () => {
   const [formData, setFormData] = useState({});
-
 
   const userDataHandler = async (event) => {
     event.preventDefault();
 
     const userData = {
       username: formData.username,
+      email: formData.email,
       password: formData.password,
       firstName: formData.firstName,
       lastName: formData.lastName,
+      dateOfBirth: formData.dateOfBirth,
     };
 
     try {
       console.log(userData);
-      const response = await createUserService(userData);  
+      const response = await createUserService(userData);
       console.log(response);
 
       alert('User created successfully!');
@@ -48,6 +48,24 @@ const CreateUser = () => {
             }
             className="form-input"
             placeholder="Enter username"
+            required
+          />
+        </div>
+        <div className="input-group">
+          <label className="input-label" htmlFor="email">
+            Email:
+          </label>
+          <input
+            type="email"
+            id="email"
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                email: e.target.value,
+              }))
+            }
+            className="form-input"
+            placeholder="Enter email"
             required
           />
         </div>
@@ -105,6 +123,24 @@ const CreateUser = () => {
             required
           />
         </div>
+        <div className="input-group">
+          <label className="input-label" htmlFor="dateOfBirth">
+            Date of Birth:
+          </label>
+          <input
+            type="date"
+            id="dateOfBirth"
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                dateOfBirth: e.target.value,
+              }))
+            }
+            className="form-input"
+            placeholder="Enter date of birth"
+            required
+          />
+        </div>
         <button
           type="submit"
           className="create-user-button"
@@ -118,3 +154,4 @@ const CreateUser = () => {
 };
 
 export default CreateUser;
+

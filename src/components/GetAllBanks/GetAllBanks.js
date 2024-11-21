@@ -28,20 +28,18 @@ const GetAllBanks = () => {
           const updatedRespond = selectTableAttribute(response.data, [
             'id',
             'name',
-            'abbreviation',
-            'createdAt',
-            'updatedAt'
+            'abbreviation'
           ]);
-          setHeader(Object.keys(updatedRespond[0])); // Extract table headers
-          setBankData(updatedRespond); // Set bank data
+          setHeader(Object.keys(updatedRespond[0])); 
+          setBankData(updatedRespond); 
           console.log(updatedRespond);
           setTotalPages(
             Math.ceil(Number(response.headers['x-total-count']) / pageSize)
-          ); // Calculate total pages
+          ); 
         } else {
           setHeader([]);
           setBankData([]);
-          setTotalPages(1); // Reset total pages if no data
+          setTotalPages(1); 
         }
       } catch (error) {
         console.error('Error fetching bank data:', error);

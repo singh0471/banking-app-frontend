@@ -14,6 +14,16 @@ import UpdateBank from './components/UpdateBank/UpdateBank';
 import GetAllUsers from './components/GetAllUsers/GetAllUsers';
 import GetLedger from './components/GetLedger/GetLedger';
 import GetAllBanks from './components/GetAllBanks/GetAllBanks';
+import DefaultUserDashboard from './components/DefaultUserDashboard/DefaultUserDashboard';
+import CreateAccount from './components/CreateAccount/CreateAccount';
+import GetAllAccounts from './components/GetAllAccounts/GetAllAccounts';
+import DeleteAccounts from './components/DeleteAccounts/DeleteAccounts';
+import ViewPassbook from './components/ViewPassbook/ViewPassbook';
+import KYC from './components/KYC/KYC';
+import TransferMoney from './components/TransferMoney/TransferMoney';
+import KycRequests from './components/KycRequests/KycRequests';
+
+
 function App() {
   
     return ( 
@@ -63,15 +73,38 @@ function App() {
           path="get-banks"
           element={<ProtectedRoute role="admin" component={GetAllBanks} />}
         />
+
+<Route
+          path="kyc-requests"
+          element={<ProtectedRoute role="admin" component={KycRequests} />}
+        />
+        
       </Route>
       
       
 
       {/* User Dashboard Route */}
+      {/* <Route
+        path="/user-dashboard"
+        element={<ProtectedRoute role="user" component={UserDashboard} />}
+      /> */}
+
       <Route
         path="/user-dashboard"
         element={<ProtectedRoute role="user" component={UserDashboard} />}
-      />
+      >
+        {/* Default user dashboard content */}
+        <Route index element={<DefaultUserDashboard />} />
+        <Route path='create-account' element={<ProtectedRoute role="user" component={CreateAccount}/>}/>
+        <Route path='view-accounts' element={<ProtectedRoute role="user" component={GetAllAccounts}/>}/>
+        <Route path='delete-account' element={<ProtectedRoute role="user" component={DeleteAccounts}/>}/>
+        <Route path='view-passbook' element={<ProtectedRoute role="user" component={ViewPassbook}/>}/>
+        <Route path='kyc' element={<ProtectedRoute role="user" component={KYC}/>}/>
+        <Route path="transfer-money" element={<ProtectedRoute role="user" component={TransferMoney} />}
+        />
+      </Route>
+      
+      
     </Routes>
   )
 }

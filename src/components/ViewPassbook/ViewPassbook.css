@@ -1,0 +1,73 @@
+.view-passbook-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%; /* Ensure the container takes full width */
+  }
+  
+  .back-button,
+  .download-passbook-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  
+  .back-button:hover,
+  .download-passbook-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .table-container {
+    width: 100%; /* Ensure the table container spans the full width */
+    margin-top: 20px;
+    padding: 20px;
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+    overflow-x: auto; /* Allow horizontal scrolling if table is too wide */
+  }
+  
+  table {
+    width: 100%; /* Ensure the table takes full width */
+    border-collapse: collapse;
+    table-layout: auto; /* Let the table adjust based on content */
+  }
+  
+  table th,
+  table td {
+    padding: 12px 15px; /* Add padding for better readability */
+    text-align: center;
+    border: 1px solid #ddd; /* Border around table cells */
+  }
+  
+  .no-data {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .pagination,
+  .page-size {
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .table-container {
+      padding: 10px;
+    }
+  
+    .back-button,
+    .download-passbook-button {
+      font-size: 12px;
+      padding: 8px 16px;
+    }
+  }
+  
+
+  .download-button{
+    color: brown;
+  }

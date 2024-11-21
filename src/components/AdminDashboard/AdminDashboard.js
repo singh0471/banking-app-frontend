@@ -31,7 +31,7 @@ const AdminDashboard = () => {
             </div>
           </div>
           <button className="nav-button" onClick={() => navigation('/admin-dashboard/get-ledger')}>Ledger Overview</button>
-          <button className="nav-button">Transaction Details</button>
+          <button className="nav-button"   onClick={() => navigation('/admin-dashboard/kyc-requests')}>KYC Requests</button>
         </div>
         <button className="logout-button" onClick={() => { localStorage.removeItem('token'); navigation('/'); }}>Logout</button>
       </nav>

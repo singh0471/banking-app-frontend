@@ -13,7 +13,7 @@ const getAllBanksService = async ({ page, limit, name, abbreviation }) => {
     headers: { auth: token },
     params,
   });
-
+  console.log("response ",response.data)
   return response;
 };
 

@@ -5,6 +5,7 @@ import loginService from '../../services/loginService';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 
+
 function Login({ setShowLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -24,6 +25,7 @@ function Login({ setShowLogin }) {
     localStorage.setItem('token',token)
     console.log(response.data)
     
+    alert('login successful');
     if(jwtDecode(token.split(" ")[1]).isAdmin){
         navigation('/admin-dashboard')
     }

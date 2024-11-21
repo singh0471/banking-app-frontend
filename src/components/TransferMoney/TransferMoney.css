@@ -1,0 +1,134 @@
+/* Container for Transfer Money */
+.transfer-money-container {
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styling */
+.transfer-money-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333; /* Dark color for title */
+}
+
+/* Form Group Styling */
+.transfer-money-container .form-group {
+  margin-bottom: 20px;
+}
+
+/* Labels */
+.transfer-money-container label {
+  font-weight: bold;
+  color: #555; /* Slightly grey color for labels */
+  font-size: 16px;
+}
+
+/* Select and Input Fields */
+.transfer-money-container select,
+.transfer-money-container input[type="number"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #F5F5F5;
+  color: #333; /* Dark color for text inside the inputs */
+  font-size: 14px;
+  transition: border 0.3s ease-in-out;
+}
+
+/* Focused State for Select and Input Fields */
+.transfer-money-container select:focus,
+.transfer-money-container input[type="number"]:focus {
+  border: 2px solid #007bff; /* Blue border when focused */
+  outline: none;
+}
+
+/* Recipient Account Number Field */
+.transfer-money-container input[type="text"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #F5F5F5;
+  color: #333; /* Dark color for text */
+  font-size: 14px;
+}
+
+/* Focus State for Recipient Account Number */
+.transfer-money-container input[type="text"]:focus {
+  border: 2px solid #007bff; /* Blue border when focused */
+  outline: none;
+}
+
+/* Submit Button Styling */
+.transfer-money-container button.submit-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Hover and Focus Effects for Submit Button */
+.transfer-money-container button.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.transfer-money-container button.submit-button:focus {
+  outline: none;
+}
+
+/* Error Message Styling */
+.transfer-money-container .error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Back Button Styling */
+.transfer-money-container .back-button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+/* Hover Effects for Back Button */
+.transfer-money-container .back-button:hover {
+  background-color: #218838;
+}
+
+/* Responsive Styling for Smaller Screens */
+@media (max-width: 768px) {
+  .transfer-money-container {
+      width: 90%;
+  }
+
+  .transfer-money-container .form-group {
+      margin-bottom: 10px;
+  }
+
+  .transfer-money-container button.submit-button {
+      font-size: 14px;
+  }
+
+  .transfer-money-container input[type="text"],
+  .transfer-money-container input[type="number"],
+  .transfer-money-container select {
+      padding: 10px;
+  }
+}
