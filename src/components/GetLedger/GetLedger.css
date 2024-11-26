@@ -1,19 +1,19 @@
 .get-ledger-container {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Adjust spacing between components */
+    gap: 15px;  
     align-items: center;
     margin: 20px auto;
     width: 100%;
-    max-width: 1200px; /* Restrict maximum width for consistency */
+    max-width: 1200px; 
   }
   
-  /* Styling for Bank ID input */
+ 
   .bank-id-input {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 5px; /* Spacing between label and input */
+    gap: 5px;  
     width: 100%;
     max-width: 500px;
     color: #4A4A4A;
@@ -34,18 +34,18 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  /* Styling for filters */
+ 
   .filters {
     display: flex;
     gap: 10px;
     justify-content: center;
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    flex-wrap: wrap;  
     margin-top: 10px;
     width: 100%;
     max-width: 600px;
   }
   
-  /* Styling for PageSize and Pagination components */
+  
   .page-size,
   .pagination {
     margin-top: 10px;
@@ -53,33 +53,33 @@
     justify-content: center;
   }
   
-  /* Table container styling */
+   
   .table-container {
-    width: 100%; /* Ensure table takes full available space */
+    width: 100%; 
     margin: 20px auto;
-    overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
-    padding: 0; /* Remove padding around the table */
+    overflow-x: auto;  
+    padding: 0;  
   }
   
-  /* Remove any background layer behind the table */
+   
   .table-container::before,
   .table-container::after {
     content: '';
     display: none;
   }
   
-  /* Table styling */
+  
   .custom-table {
     width: 100%;
     border-collapse: collapse;
     background-color: #F5FFFA;
-    border-radius: 0; /* Remove border radius */
+    border-radius: 0;  
     border: 1px solid #ddd;
-    table-layout: auto; /* Adjust columns based on content */
-    box-shadow: none; /* Remove any shadow around the table */
+    table-layout: auto;  
+    box-shadow: none;  
   }
   
-  /* Header styling */
+   
   .custom-table-header {
     background-color: #008080;
     color: white;
@@ -89,22 +89,22 @@
     font-weight: bold;
     text-transform: capitalize;
     border: 1px solid #ddd;
-    white-space: nowrap; /* Prevent header text wrapping */
+    white-space: nowrap;  
   }
   
-  /* Cell styling */
+  
   .custom-table-cell {
     padding: 10px;
     text-align: left;
     border: 1px solid #ddd;
     font-size: 13px;
     color: #4A4A4A;
-    white-space: nowrap; /* Keep content in a single line */
-    overflow: hidden; /* Hide overflowed text */
-    text-overflow: ellipsis; /* Add ellipsis for overflowed content */
+    white-space: nowrap;  
+    overflow: hidden;  
+    text-overflow: ellipsis;  
   }
   
-  /* Adjust rows for readability */
+   
   .custom-table-row:nth-child(even) {
     background-color: #E8F5F5;
   }
@@ -118,7 +118,7 @@
     cursor: pointer;
   }
   
-  /* Responsive design for smaller screens */
+  
   @media (max-width: 768px) {
     .filters,
     .bank-id-input {
@@ -133,5 +133,29 @@
     .custom-table-cell {
       padding: 8px;
     }
+  }
+  
+
+  .bank-id-select {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 16px; 
+  }
+  
+  .bank-id-select label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #6c757d;  
+  }
+  
+  .bank-select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;  
+    color: #333;  
   }
   

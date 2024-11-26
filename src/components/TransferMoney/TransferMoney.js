@@ -3,13 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import depositService from '../../services/depositService';
 import withdrawService from '../../services/withdrawService';
 import transferService from '../../services/transferService';
-import getAllAccountsService from '../../services/getAllAccountsService'; 
+import getAllAccountsService from '../../services/getAllAccountsService';
 import './TransferMoney.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TransferMoney = () => {
-  const [transferType, setTransferType] = useState('');  
+  const [transferType, setTransferType] = useState('');
   const [selectedAccount, setSelectedAccount] = useState('');
-  const [accounts, setAccounts] = useState([]);  
+  const [accounts, setAccounts] = useState([]);
   const [amount, setAmount] = useState('');
   const [recipientAccount, setRecipientAccount] = useState('');
   const [error, setError] = useState('');
@@ -18,11 +20,12 @@ const TransferMoney = () => {
   useEffect(() => {
     const fetchAccounts = async () => {
       try {
-        const response = await getAllAccountsService({});  
-        setAccounts(response.data);  
+        const response = await getAllAccountsService({});
+        setAccounts(response.data);
       } catch (error) {
         console.error('Error fetching accounts:', error);
         setError('Error fetching accounts. Please try again later.');
+        toast.error('Error fetching accounts. Please try again later.');  
       }
     };
 
@@ -31,7 +34,7 @@ const TransferMoney = () => {
 
   const handleTransferTypeChange = (e) => {
     setTransferType(e.target.value);
-    setRecipientAccount('');   
+    setRecipientAccount('');
   };
 
   const handleAccountChange = (e) => {
@@ -51,35 +54,40 @@ const TransferMoney = () => {
 
     if (!selectedAccount || !amount) {
       setError('Account and amount are required.');
+      toast.error('Account and amount are required.');  
       return;
     }
 
     try {
       if (transferType === 'deposit') {
-        await depositService(selectedAccount, amount);   
-        alert('Deposit successful');
+        await depositService(selectedAccount, amount);
+        toast.success('Deposit successful!');  
       } else if (transferType === 'withdraw') {
-        await withdrawService(selectedAccount, amount);  
-        alert('Withdrawal successful');
+        await withdrawService(selectedAccount, amount);
+        toast.success('Withdrawal successful!');  
       } else if (transferType === 'transfer' && recipientAccount) {
-        await transferService(selectedAccount, recipientAccount, amount);   
-        alert('Transfer successful');
+        await transferService(selectedAccount, recipientAccount, amount);
+        toast.success('Transfer successful!');  
       } else {
         setError('Recipient account is required for transfers.');
+        toast.error('Recipient account is required for transfers.'); 
         return;
       }
     } catch (error) {
       console.error('Error processing transaction:', error);
-      alert('Transaction failed. Please try again.');
+      toast.error('Transaction failed. Please try again.');  
     }
   };
 
   return (
     <div className="transfer-money-container">
-      <button onClick={() => navigate('/user-dashboard')} className="back-button">Back to Dashboard</button>
+      <ToastContainer />
+      <button onClick={() => navigate('/user-dashboard')} className="back-button">
+        Back to Dashboard
+      </button>
 
       <h2>Transfer Money</h2>
-      
+
       <form onSubmit={handleSubmit} className="transfer-form">
         <div className="form-group">
           <label htmlFor="transferType">Transfer Type:</label>
@@ -128,7 +136,9 @@ const TransferMoney = () => {
         )}
 
         <div className="form-group">
-          <button type="submit" className="submit-button">Submit</button>
+          <button type="submit" className="submit-button">
+            Submit
+          </button>
         </div>
 
         {error && <p className="error">{error}</p>}

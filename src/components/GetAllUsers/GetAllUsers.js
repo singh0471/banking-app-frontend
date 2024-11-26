@@ -4,7 +4,10 @@ import Table from '../../SharedComponents/Table/Table';
 import Pagination from '../../SharedComponents/Pagination/Pagination';
 import PageSize from '../../SharedComponents/PageSize/PageSize';
 import Filter from '../../SharedComponents/Filter/Filter';
+import { useNavigate } from 'react-router-dom';
 import { selectTableAttribute } from '../../utils/helper/selectTableAttribute';
+import './GetAllUsers.css';
+
 const GetAllUsers = () => {
   const [header, setHeader] = useState([]);
   const [userData, setUserData] = useState([]);
@@ -12,9 +15,9 @@ const GetAllUsers = () => {
   const [pageSize, setPageSize] = useState(2);
   const [filters, setFilters] = useState({});
   const [totalPages, setTotalPages] = useState(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('Fetching data with:', { filters, pageSize, currentPage });
     const fetchData = async () => {
       try {
         const response = await getAllUsersService({
@@ -22,17 +25,37 @@ const GetAllUsers = () => {
           limit: pageSize,
           ...filters,
         });
-        console.log(response);
+
         if (response.data.length > 0) {
-            const updatedRespond = selectTableAttribute(response.data,['id','username','email','firstName','lastName','dateOfBirth','totalBalance']);
-          setHeader(Object.keys(updatedRespond[0]));  
-          setUserData(updatedRespond);  
-          console.log(updatedRespond);
-          setTotalPages(Math.ceil(Number(response.headers['x-total-count']) / pageSize));  
+          const updatedResponse = selectTableAttribute(response.data, [
+            'id',
+            'username',
+            'firstName',
+            'lastName',
+            'dateOfBirth',
+            'totalBalance',
+          ]);
+
+          
+          const updatedWithAccounts = updatedResponse.map((user) => ({
+            ...user,
+            viewAccounts: (
+              <button
+                className="view-accounts-button"
+                onClick={() => navigate('/admin-dashboard/get-user-accounts', { state: { userId: user.id } })}
+              >
+                View Accounts
+              </button>
+            ),
+          }));
+
+          setHeader([...Object.keys(updatedResponse[0]), 'viewAccounts']);
+          setUserData(updatedWithAccounts);
+          setTotalPages(Math.ceil(Number(response.headers['x-total-count']) / pageSize));
         } else {
           setHeader([]);
           setUserData([]);
-          setTotalPages(1);  
+          setTotalPages(1);
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -40,22 +63,24 @@ const GetAllUsers = () => {
     };
 
     fetchData();
-  }, [filters, pageSize, currentPage]);
+  }, [filters, pageSize, currentPage, navigate]);
 
   const handlePageChange = (page) => setCurrentPage(page);
 
   const handlePageSizeChange = (size) => {
     setPageSize(size);
-    setCurrentPage(1);  
+    setCurrentPage(1);
   };
 
   const handleFilterChange = (attribute, value) => {
     setFilters((prevFilters) => ({ ...prevFilters, [attribute]: value }));
-    setCurrentPage(1);  
+    setCurrentPage(1);
   };
 
   return (
     <div className="get-users-container">
+
+      
       <div className="filters">
         <Filter
           label="Username"

@@ -1,72 +1,99 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import getAllUsersService from '../../services/getAllUsersService';
 import updateUserService from '../../services/updateUserService';
+import camelCaseToTitleCase from '../../utils/helper/camelCaseToTitle'; // Import the helper function
+import { ToastContainer, toast } from 'react-toastify';  // Import Toastify
+import 'react-toastify/dist/ReactToastify.css';  // Import Toastify CSS
 import './UpdateUser.css';
 
 const UpdateUser = () => {
+  const [users, setUsers] = useState([]);
   const [userId, setUserId] = useState('');
-  const [updates, setUpdates] = useState([{ parameter: '', value: '' }]); // Initial single update option
-  const allParameters = ['username', 'firstName', 'lastName'];
+  const [updates, setUpdates] = useState([{ parameter: '', value: '' }]);
 
-  // Handle adding a new update option
+  const allParameters = ['username', 'firstName', 'lastName', 'email', 'password'];
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await getAllUsersService();
+        if (response.data) {
+          setUsers(response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        toast.error('Failed to fetch users. Please try again.');
+      }
+    };
+    fetchUsers();
+  }, []);
+
   const addUpdateOption = () => {
-    if (updates.length < 3) {
+    if (updates.length < 5) {
       setUpdates([...updates, { parameter: '', value: '' }]);
     }
   };
 
-  
   const removeUpdateOption = (index) => {
     setUpdates(updates.filter((_, i) => i !== index));
   };
 
-   
   const handleUpdateChange = (index, field, value) => {
     const newUpdates = [...updates];
     newUpdates[index][field] = value;
     setUpdates(newUpdates);
   };
 
-   
   const handleUpdateUser = async (event) => {
     event.preventDefault();
 
     try {
-      for (const update of updates) {
-        if (update.parameter && update.value) {
-          const response = await updateUserService(userId, update.parameter, update.value);
-          console.log(`Updated ${update.parameter}:`, response);
-        }
+      const updateBody = updates.filter((update) => update.parameter && update.value);
+      if (updateBody.length === 0) {
+        toast.error('Please fill in at least one parameter to update.');
+        return;
       }
-      alert('User updated successfully!');
+
+      console.log('Request Body:', updateBody);
+
+      await updateUserService(userId, updateBody);
+      toast.success('User updated successfully!');
     } catch (error) {
       console.error('Error updating user:', error);
-      alert('Failed to update user. Please try again.');
+      toast.error('Failed to update user. Please try again.');
     }
   };
 
-   
   const getAvailableParameters = (index) => {
     const selectedParameters = updates.map((update) => update.parameter);
-    return allParameters.filter((param) => !selectedParameters.includes(param) || updates[index].parameter === param);
+    return allParameters.filter(
+      (param) => !selectedParameters.includes(param) || updates[index].parameter === param
+    );
   };
 
   return (
     <div className="update-user-container">
+      <ToastContainer /> {/* Add ToastContainer to render the toast notifications */}
       <h2 className="update-user-heading">Update User</h2>
       <form className="update-user-form">
         <div className="input-group">
           <label className="input-label" htmlFor="userId">
-            User ID:
+            Select User:
           </label>
-          <input
-            type="text"
+          <select
             id="userId"
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
-            className="form-input"
-            placeholder="Enter user ID"
+            className="form-select"
             required
-          />
+          >
+            <option value="">Select User</option>
+            {users.map((user) => (
+              <option key={user.id} value={user.id}>
+                {`${user.id} - ${user.username}`}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="update-options">
           {updates.map((update, index) => (
@@ -80,7 +107,7 @@ const UpdateUser = () => {
                 <option value="">Select Parameter</option>
                 {getAvailableParameters(index).map((param) => (
                   <option key={param} value={param}>
-                    {param}
+                    {camelCaseToTitleCase(param)} {/* Convert to Title Case */}
                   </option>
                 ))}
               </select>
@@ -89,7 +116,7 @@ const UpdateUser = () => {
                 className="form-input"
                 value={update.value}
                 onChange={(e) => handleUpdateChange(index, 'value', e.target.value)}
-                placeholder="Enter value"
+                placeholder={`Enter ${camelCaseToTitleCase(update.parameter) || 'value'}`} // Convert to Title Case
                 required
               />
               {updates.length > 1 && (
@@ -103,7 +130,7 @@ const UpdateUser = () => {
               )}
             </div>
           ))}
-          {updates.length < 3 && (
+          {updates.length < 5 && (
             <button type="button" className="add-button" onClick={addUpdateOption}>
               +
             </button>

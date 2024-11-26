@@ -17,26 +17,36 @@ const ViewPassbook = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(2);
+  const [filters, setFilters] = useState({ fromDate: '', toDate: '' });
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPassbook = async () => {
       try {
+        const filterParams = {};
+
+        if (filters.fromDate) {
+          filterParams.fromDate = filters.fromDate;
+        }
+        if (filters.toDate) {
+          filterParams.toDate = filters.toDate;
+        }
+
         const response = await viewPassbookService(accountNumber, {
           page: currentPage,
           limit: pageSize,
+          filters: filterParams,
         });
 
         if (response.data.length > 0) {
           setPassbookData(response.data);
 
-          
-          const totalCount = response.headers['x-total-count'] || 0;  
+          const totalCount = response.headers['x-total-count'] || 0;
           setTotalPages(Math.ceil(totalCount / pageSize));
         } else {
           setPassbookData([]);
-          setTotalPages(1);  
+          setTotalPages(1);
         }
       } catch (error) {
         console.error('Error fetching passbook:', error);
@@ -44,7 +54,7 @@ const ViewPassbook = () => {
     };
 
     fetchPassbook();
-  }, [accountNumber, currentPage, pageSize]);
+  }, [accountNumber, currentPage, pageSize, filters]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -52,7 +62,7 @@ const ViewPassbook = () => {
 
   const handlePageSizeChange = (size) => {
     setPageSize(size);
-    setCurrentPage(1);  
+    setCurrentPage(1);
   };
 
   const handleBack = () => {
@@ -81,6 +91,13 @@ const ViewPassbook = () => {
     doc.save('passbook.pdf');
   };
 
+  const handleFilterChange = (attribute, value) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [attribute]: value,
+    }));
+  };
+
   const selectedData = passbookData.length
     ? selectTableAttribute(passbookData, [
         'accountNumber',
@@ -94,12 +111,36 @@ const ViewPassbook = () => {
 
   return (
     <div className="view-passbook-container">
-      <button onClick={handleBack} className="back-button">
-        Back to Accounts
-      </button>
-      <button onClick={handleDownload} className="download-button">
-        Download Passbook
-      </button>
+       <div className="top-buttons">
+          <button onClick={handleBack} className="back-button">
+            Back to Accounts
+          </button>
+          <button onClick={handleDownload} className="download-button">
+            Download Passbook
+          </button>
+        </div>
+
+      <div className="filter-container">
+        <div className="filter">
+          <label htmlFor="fromDate">From Date:</label>
+          <input
+            id="fromDate"
+            type="date"
+            value={filters.fromDate}
+            onChange={(e) => handleFilterChange('fromDate', e.target.value)}
+          />
+        </div>
+        <div className="filter">
+          <label htmlFor="toDate">To Date:</label>
+          <input
+            id="toDate"
+            type="date"
+            value={filters.toDate}
+            onChange={(e) => handleFilterChange('toDate', e.target.value)}
+          />
+        </div>
+      </div>
+
       <PageSize pageSize={pageSize} onPageSizeChange={handlePageSizeChange} />
       <div className="table-container">
         {selectedData.length > 0 ? (
@@ -118,4 +159,3 @@ const ViewPassbook = () => {
 };
 
 export default ViewPassbook;
-

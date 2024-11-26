@@ -1,32 +1,38 @@
-.get-banks-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Add spacing between components */
-    align-items: center; /* Center the components */
-    margin: 20px auto;
-  }
-  
-  .table-container {
-    width: 100%;
-    max-width: 90%;
-    text-align: center;
-    padding: 20px; /* Ensure consistent padding even when empty */
-  }
-  
-  .no-data {
-    font-size: 18px;
-    color: #555;
-    margin: 10px 0;
-  }
-  
-  .filters {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
-  
-  .pagination,
-  .page-size {
-    margin-top: 10px;
-  }
-  
+.view-accounts-button {
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.view-accounts-button:hover {
+  background-color: #0056b3;
+}
+
+.view-accounts-button:active {
+  background-color: #003d80;
+  transform: scale(0.97);
+}
+
+
+.back-to-view-banks-button {
+  margin-bottom: 15px;  
+  padding: 5px 10px;  
+  font-size: 14px; 
+  background-color: #007bff;  
+  color: white;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+  margin-left: -340px;
+}
+
+.back-to-view-banks-button:hover {
+  background-color: #0056b3; 
+}

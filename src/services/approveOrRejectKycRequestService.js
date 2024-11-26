@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import { jwtDecode } from 'jwt-decode';
+
 
 const approveOrRejectKycRequestService = async (userId,status,note) => {
   try {

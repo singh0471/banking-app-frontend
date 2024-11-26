@@ -1,141 +1,21 @@
-
-
-// import React, { useState, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import getKycService from '../../services/getKycService';
-// import submitKycService from '../../services/submitKycService';
-// import photoUrlService from '../../utils/helper/photoUrlService';
-// import './KYC.css';
-
-// const KYC = () => {
-//   const [kycData, setKycData] = useState(null);
-//   const [photo, setPhoto] = useState(null);
-//   const [documentUrl, setDocumentUrl] = useState(null);
-//   const [status, setStatus] = useState('');
-//   const [adminNote, setAdminNote] = useState('');
- 
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     const fetchKYC = async () => {
-//       try {
-//         const response = await getKycService();
-//         setKycData(response.data);
-//         setStatus(response.data.status);
-//         setAdminNote(response.data.adminNote || '');
-//         setDocumentUrl(response.data.documentUrl);
-//       } catch (error) {
-//         console.error("Error fetching KYC:", error);
-//       }
-//     };
-
-//     fetchKYC();
-//   }, []);
-
-//   const handleFileChange = (e) => {
-//     setPhoto(e.target.files[0]);
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     if (!photo) {
-//       alert("Please upload a photo document");
-//       return;
-//     }
-
-//     try {
-//       const photoUrl = await photoUrlService(photo);   
-//       setDocumentUrl(photoUrl);
-
-//       const updatedKycData = await submitKycService({ document: photoUrl }); 
-//       setKycData(updatedKycData.data);   
-//       alert("KYC document uploaded successfully!");
-
-//       // Fetch the updated KYC data after upload
-//       const freshKycData = await getKycService();
-//       setKycData(freshKycData.data);  // Update the state with fresh KYC data
-//       setStatus(freshKycData.data.status);  // Update the status
-//       setAdminNote(freshKycData.data.adminNote || '');  // Update admin note
-//     } catch (error) {
-//       console.error("Error uploading KYC document:", error);
-//       alert("Failed to upload the document. Please try again.");
-//     }
-//   };
-
-//   const handleBack = () => {
-//     navigate('/user-dashboard');  
-//   };
-
-//   return (
-//     <div className="kyc-container">
-//       <button onClick={handleBack} className="back-button">Back to Dashboard</button>
-
-//       {(
-//         <div className="kyc-content">
-//           <h2>User KYC</h2>
-          
-//           {/* KYC Status and Admin Note */}
-//           <div className="kyc-status">
-//             <table className="kyc-table">
-//               <thead>
-//                 <tr>
-//                   {status && <th>Status</th>}  {/* Conditionally render Status column */}
-//                   {adminNote && <th>Note</th>}  {/* Conditionally render Note column */}
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 <tr>
-//                   {status && <td>{status}</td>}  {/* Only render Status data if it's available */}
-//                   {adminNote && <td>{adminNote}</td>} {/* Only render Note data if it's available */}
-//                 </tr>
-//               </tbody>
-//             </table>
-//           </div>
-
-//           {documentUrl && (
-//             <div className="kyc-document">
-//               <h4>Uploaded Document:</h4>
-//               <img src={documentUrl} alt="KYC Document" className="kyc-image" />
-//             </div>
-//           )}
-
-//           {/* Upload Section */}
-//           <div className="upload-section">
-//             <h4>Upload KYC Document</h4>
-//             <form onSubmit={handleSubmit}>
-//               <input 
-//                 type="file" 
-//                 onChange={handleFileChange} 
-//                 accept="image/*" 
-//                 required 
-//               />
-//               <button type="submit" className="upload-button">Upload Document</button>
-//             </form>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default KYC;
-
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import getKycService from '../../services/getKycService';
 import submitKycService from '../../services/submitKycService';
 import photoUrlService from '../../utils/helper/photoUrlService';
 import './KYC.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const KYC = () => {
   const [kycData, setKycData] = useState(null);
-  const [photo, setPhoto] = useState(null);
-  const [documentUrl, setDocumentUrl] = useState(null);
+  const [aadharPhoto, setAadharPhoto] = useState(null);
+  const [panPhoto, setPanPhoto] = useState(null);
   const [status, setStatus] = useState('');
   const [adminNote, setAdminNote] = useState('');
- 
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [showViewModal, setShowViewModal] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -145,43 +25,45 @@ const KYC = () => {
         setKycData(response.data);
         setStatus(response.data.status);
         setAdminNote(response.data.adminNote || '');
-        setDocumentUrl(response.data.documentUrl);
       } catch (error) {
         console.error("Error fetching KYC:", error);
+        toast.error('Could not fetch KYC requests');
       }
     };
 
     fetchKYC();
   }, []);
 
-  const handleFileChange = (e) => {
-    setPhoto(e.target.files[0]);
+  const handleFileChange = (e, type) => {
+    if (type === 'aadhar') {
+      setAadharPhoto(e.target.files[0]);
+    } else if (type === 'pan') {
+      setPanPhoto(e.target.files[0]);
+    }
   };
 
-  const handleSubmit = async (e) => {
+  const handleUploadDocuments = async (e) => {
     e.preventDefault();
 
-    if (!photo) {
-      alert("Please upload a photo document");
+    if (!aadharPhoto || !panPhoto) {
+      toast.error('Both Aadhar and PAN documents must be uploaded');
       return;
     }
 
     try {
-      const photoUrl = await photoUrlService(photo);   
-      setDocumentUrl(photoUrl);
+      const aadharUrl = await photoUrlService(aadharPhoto);
+      const panUrl = await photoUrlService(panPhoto);
 
-      const updatedKycData = await submitKycService({ document: photoUrl }); 
-      setKycData(updatedKycData.data);   
-      alert("KYC document uploaded successfully!");
+      await submitKycService(aadharUrl, panUrl);
+      toast.success("KYC documents uploaded successfully!");
 
-       
       const freshKycData = await getKycService();
-      setKycData(freshKycData.data);   
-      setStatus(freshKycData.data.status);   
-      setAdminNote(freshKycData.data.adminNote || '');   
+      setKycData(freshKycData.data);
+      setStatus(freshKycData.data.status);
+      setAdminNote(freshKycData.data.adminNote || '');
     } catch (error) {
-      console.error("Error uploading KYC document:", error);
-      alert("Failed to upload the document. Please try again.");
+      console.error("Error uploading KYC documents:", error);
+      toast.error("Failed to upload the documents. Please try again.");
     }
   };
 
@@ -189,60 +71,111 @@ const KYC = () => {
     navigate('/user-dashboard');  
   };
 
-  const getLabelText = () => {
-    if (status === 'rejected') {
-      return 'You need to upload your document again';
-    } else if (status === 'submitted' || status === 'approved') {
-      return 'Update Document';
+  const getButtonText = () => {
+    // return status === 'not submitted' ? 'Upload Documents' : 'Update Documents';
+
+    if(status==='not submitted')
+      return 'Upload Documents';
+    else if(status==='rejected')
+      return 'Upload Your Documents Again'
+    else 
+      return 'Update Documents'
+
+
+  };
+
+  const handleViewDocument = (type) => {
+    if (type === 'aadhar' && kycData?.aadhar) {
+      window.open(kycData.aadhar, '_blank');
+    } else if (type === 'pan' && kycData?.pan) {
+      window.open(kycData.pan, '_blank');
+    } else {
+      toast.error(`${type === 'aadhar' ? 'Aadhar' : 'PAN'} document URL is missing.`);
     }
-    return 'Upload Document';
   };
 
   return (
     <div className="kyc-container">
+      <ToastContainer />
       <button onClick={handleBack} className="back-button">Back to Dashboard</button>
 
-      {(
-        <div className="kyc-content">
-          <h2>User KYC</h2>
-          
-           
-          <div className="kyc-status">
-            <table className="kyc-table">
-              <thead>
-                <tr>
-                  {status && <th>Status</th>}   
-                  {adminNote && <th>Note</th>}  
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  {status && <td>{status}</td>}  
-                  {adminNote && <td>{adminNote}</td>}  
-                </tr>
-              </tbody>
-            </table>
-          </div>
+      <div className="kyc-content">
+        <h2>User KYC</h2>
 
-          {documentUrl && (
-            <div className="kyc-document">
-              <h4>Uploaded Document:</h4>
-              <img src={documentUrl} alt="KYC Document" className="kyc-image" />
-            </div>
+        <div className="kyc-status">
+          <table className="kyc-table">
+            <thead>
+              <tr>
+                {status && <th>Status</th>}
+                {adminNote && <th>Note</th>}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {status && <td>{status}</td>}
+                {adminNote && <td>{adminNote}</td>}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="upload-section">
+          <button className="upload-button" onClick={() => setShowUploadModal(true)}>
+            {getButtonText()}
+          </button>
+          {(status === 'submitted' || status === 'approved' || status === 'rejected') && (
+            <button className="view-button" onClick={() => setShowViewModal(true)}>
+              View Documents
+            </button>
           )}
+        </div>
+      </div>
 
-          
-          <div className="upload-section">
-            <h4>{getLabelText()}</h4>  
-            <form onSubmit={handleSubmit}>
-              <input 
-                type="file" 
-                onChange={handleFileChange} 
-                accept="image/*" 
-                required 
-              />
-              <button type="submit" className="upload-button">Upload Document</button>
+      {/* Upload Modal */}
+      {showUploadModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close-button" onClick={() => setShowUploadModal(false)}>&times;</span>
+            <h3>{getButtonText()}</h3>
+            <form onSubmit={handleUploadDocuments}>
+              <div>
+                <label htmlFor="aadhar">Upload Aadhar Card:</label>
+                <input 
+                  type="file" 
+                  id="aadhar" 
+                  onChange={(e) => handleFileChange(e, 'aadhar')} 
+                  accept="image/*" 
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="pan">Upload PAN Card:</label>
+                <input 
+                  type="file" 
+                  id="pan" 
+                  onChange={(e) => handleFileChange(e, 'pan')} 
+                  accept="image/*" 
+                  required
+                />
+              </div>
+              <button type="submit" className="upload-button">{getButtonText()}</button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* View Modal */}
+      {showViewModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close-button" onClick={() => setShowViewModal(false)}>&times;</span>
+            <h3>View Documents</h3>
+            <button className="view-modal-button" onClick={() => handleViewDocument('aadhar')}>
+              View Aadhar Document
+            </button>
+            <button className="view-modal-button" onClick={() => handleViewDocument('pan')}>
+              View PAN Document
+            </button>
           </div>
         </div>
       )}

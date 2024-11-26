@@ -1,47 +1,39 @@
 .welcome-message {
   text-align: center;
-  padding: 15px 0;  
-  background: #FA8072;  
-  font-size: 18px;  
-  font-weight: bold;  
-  color: white;  
-  margin: 0;  
-  border-radius: 0;  
-  width: 100%;  
-  box-shadow: none; 
-  position: relative; 
-  top: -80px;  
-  margin-bottom: 60px;
+  padding: 10px 0;  
+  background: #FA8072;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 900px;  
+  box-shadow: none;
+  margin-top: 180px; 
+  margin-bottom: 40px;  
 }
 
 .dashboard-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px;  
-  margin-top: 40px;  
-}
-
-.dashboard-description {
-  font-size: 16px;
-  color: #ddd;
-  margin-bottom: 20px;
+  padding-top: 140px; 
 }
 
 .button-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);  
-  gap: 20px;  /* Reduced gap between buttons */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px; 
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px; 
   margin: 0 auto;
 }
 
 .neon-button {
-  font-size: 1rem;  /* Adjusted font size */
+  font-size: 1rem;  
   color: #fff;
-  background: linear-gradient(145deg, #2d2d2d, #3a3a3a);  
-  padding: 20px 25px;  /* Adjusted padding */
+  background: linear-gradient(145deg, #2d2d2d, #3a3a3a);
+  padding: 20px 25px;
   border-radius: 30px;
   border: 2px solid;
   position: relative;
@@ -50,7 +42,6 @@
   text-align: center;
   transition: all 0.3s ease;
   overflow: hidden;
-  /* Removed top: -40px; */
 }
 
 .neon-button.pink {
@@ -58,7 +49,7 @@
   background: #661141;
 }
 .neon-button.pink::before {
-  box-shadow: 0 0 15px #ff007f, 0 0 30px #ff007f, 0 0 45px #ff007f;
+  box-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f, 0 0 30px #ff007f;
 }
 
 .neon-button.blue {
@@ -66,7 +57,7 @@
   background: #0a3a60;
 }
 .neon-button.blue::before {
-  box-shadow: 0 0 15px #00aaff, 0 0 30px #00aaff, 0 0 45px #00aaff;
+  box-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff, 0 0 30px #00aaff;
 }
 
 .neon-button.red {
@@ -74,7 +65,7 @@
   background: #660000;
 }
 .neon-button.red::before {
-  box-shadow: 0 0 15px #ff3333, 0 0 30px #ff3333, 0 0 45px #ff3333;
+  box-shadow: 0 0 10px #ff3333, 0 0 20px #ff3333, 0 0 30px #ff3333;
 }
 
 .neon-button.yellow {
@@ -82,7 +73,7 @@
   background: #665c00;
 }
 .neon-button.yellow::before {
-  box-shadow: 0 0 15px #ffcc00, 0 0 30px #ffcc00, 0 0 45px #ffcc00;
+  box-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00;
 }
 
 .neon-button.green {
@@ -90,7 +81,7 @@
   background: #004d1a;
 }
 .neon-button.green::before {
-  box-shadow: 0 0 15px #33ff77, 0 0 30px #33ff77, 0 0 45px #33ff77;
+  box-shadow: 0 0 10px #33ff77, 0 0 20px #33ff77, 0 0 30px #33ff77;
 }
 
 .neon-button.purple {
@@ -98,7 +89,7 @@
   background: #3d004d;
 }
 .neon-button.purple::before {
-  box-shadow: 0 0 15px #cc00ff, 0 0 30px #cc00ff, 0 0 45px #cc00ff;
+  box-shadow: 0 0 10px #cc00ff, 0 0 20px #cc00ff, 0 0 30px #cc00ff;
 }
 
 .neon-button.orange {
@@ -106,7 +97,7 @@
   background: #663d00;
 }
 .neon-button.orange::before {
-  box-shadow: 0 0 15px #ffaa33, 0 0 30px #ffaa33, 0 0 45px #ffaa33;
+  box-shadow: 0 0 10px #ffaa33, 0 0 20px #ffaa33, 0 0 30px #ffaa33;
 }
 
 .neon-button.cyan {
@@ -114,7 +105,7 @@
   background: #004d4d;
 }
 .neon-button.cyan::before {
-  box-shadow: 0 0 15px #00ffee, 0 0 30px #00ffee, 0 0 45px #00ffee;
+  box-shadow: 0 0 10px #00ffee, 0 0 20px #00ffee, 0 0 30px #00ffee;
 }
 
 .neon-button:hover::before,

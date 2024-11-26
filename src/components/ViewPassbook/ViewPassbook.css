@@ -1,73 +1,127 @@
 .view-passbook-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-    width: 100%; /* Ensure the container takes full width */
-  }
-  
-  .back-button,
-  .download-passbook-button {
-    padding: 10px 20px;
-    font-size: 14px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px;
-  }
-  
-  
-  .back-button:hover,
-  .download-passbook-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .table-container {
-    width: 100%; /* Ensure the table container spans the full width */
-    margin-top: 20px;
-    padding: 20px;
-    box-sizing: border-box; /* Ensure padding is included in width calculation */
-    overflow-x: auto; /* Allow horizontal scrolling if table is too wide */
-  }
-  
-  table {
-    width: 100%; /* Ensure the table takes full width */
-    border-collapse: collapse;
-    table-layout: auto; /* Let the table adjust based on content */
-  }
-  
-  table th,
-  table td {
-    padding: 12px 15px; /* Add padding for better readability */
-    text-align: center;
-    border: 1px solid #ddd; /* Border around table cells */
-  }
-  
-  .no-data {
-    font-size: 18px;
-    color: #555;
-  }
-  
-  .pagination,
-  .page-size {
-    margin-top: 20px;
-  }
-  
-  @media (max-width: 768px) {
-    .table-container {
-      padding: 10px;
-    }
-  
-    .back-button,
-    .download-passbook-button {
-      font-size: 12px;
-      padding: 8px 16px;
-    }
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%; /* Ensure the container takes full width */
+}
 
-  .download-button{
-    color: brown;
+.top-buttons {
+  display: flex;
+  justify-content: space-between; /* Place buttons at opposite ends */
+  align-items: center; /* Center-align buttons vertically */
+  width: 100%; /* Full width for the button row */
+  padding: 10px 20px; /* Add horizontal padding */
+  margin-bottom: 10px; /* Space below the button row */
+  box-sizing: border-box; /* Ensure padding doesn't affect layout */
+}
+
+.back-button,
+.download-button {
+  padding: 8px 16px; /* Slightly smaller padding for both buttons */
+  font-size: 12px; /* Slightly smaller font size */
+  color: white; /* White text */
+  background-color: #28a745; /* Green background */
+  border: none;
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.2s ease; /* Smooth hover effect */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.back-button:hover,
+.download-button:hover {
+  background-color: #218838; /* Slightly darker green on hover */
+  transform: scale(1.03); /* Slightly enlarge on hover */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Enhance shadow */
+}
+
+.back-button:active,
+.download-button:active {
+  background-color: #1e7e34; /* Even darker green when clicked */
+  transform: scale(0.97); /* Slightly shrink on click */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Reduce shadow */
+}
+
+.filter-container {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  justify-content: flex-start; /* Align filters to the left */
+  gap: 20px; /* Space between the "From Date" and "To Date" fields */
+  margin-bottom: 20px;
+  width: 100%; /* Ensure the container spans full width */
+  padding-left: 20px; /* Add some space from the left edge of the screen */
+}
+
+.filter {
+  display: flex;
+  flex-direction: column; /* Stack label above input */
+}
+
+.filter label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px; /* Space between label and input */
+}
+
+.filter input {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.filter input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.table-container {
+  width: 100%; /* Ensure the table container spans the full width */
+  margin-top: 20px;
+  padding: 20px;
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+  overflow-x: auto; /* Allow horizontal scrolling if table is too wide */
+}
+
+table {
+  width: 100%; /* Ensure the table takes full width */
+  border-collapse: collapse;
+  table-layout: auto; /* Let the table adjust based on content */
+}
+
+table th,
+table td {
+  padding: 12px 15px; /* Add padding for better readability */
+  text-align: center;
+  border: 1px solid #ddd; /* Border around table cells */
+}
+
+.no-data {
+  font-size: 18px;
+  color: #555;
+}
+
+.pagination,
+.page-size {
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .table-container {
+    padding: 10px;
   }
+
+  .back-button,
+  .download-button {
+    font-size: 10px; /* Adjust button font size for smaller screens */
+    padding: 6px 12px; /* Reduce padding for smaller screens */
+  }
+
+  .top-buttons {
+    flex-direction: column; /* Stack buttons on smaller screens */
+    gap: 10px; /* Add spacing between stacked buttons */
+  }
+}

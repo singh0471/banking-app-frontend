@@ -5,17 +5,18 @@ import PageSize from '../../SharedComponents/PageSize/PageSize';
 import getKycRequestsService from '../../services/getKycRequestsService';
 import approveOrRejectKycRequestService from '../../services/approveOrRejectKycRequestService';
 import { selectTableAttribute } from '../../utils/helper/selectTableAttribute';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './KycRequests.css';
 
 const KycRequests = () => {
   const [kycRequests, setKycRequests] = useState([]);
-  const [headers, setHeaders] = useState([]);  
+  const [headers, setHeaders] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const [notes, setNotes] = useState({});  
+  const [notes, setNotes] = useState({});
 
-   
   const fetchKYCRequests = async () => {
     try {
       const response = await getKycRequestsService({
@@ -24,50 +25,58 @@ const KycRequests = () => {
       });
 
       if (response.data.length > 0) {
-        const filteredData = selectTableAttribute(response.data, ['userId', 'document', 'status']);
-        setKycRequests(
-          filteredData.map((row) => ({
-            ...row,
-            document: (
-              <a href={row.document} target="_blank" rel="noopener noreferrer">
-                {row.document}
-              </a>
-            ),
-            approve: (
-              <button
-                onClick={() => handleApprove(row.userId)}
-                className="approve-button"
-              >
-                Approve
-              </button>
-            ),
-            reject: (
-              <button
-                onClick={() => handleReject(row.userId, notes[row.userId])}
-                className="reject-button"
-                
-              >
-                Reject
-              </button>
-            ),
-            note: (
-              <div className="note-container">
-                <input
-                  type="text"
-                  placeholder="Add rejection note"
-                  onChange={(e) => handleNoteChange(row.userId, e.target.value)}
-                  className="rejection-input"
-                  style={{
-                    color: '#000',
-                    backgroundColor: '#fff',
-                  }}
-                />
-              </div>
-            ),
-          }))
-        );
+        console.log("KYC Data:", response.data); // Log the response for debugging
 
-        setHeaders([...Object.keys(filteredData[0]), 'approve', 'reject', 'note']);
+        const filteredData = response.data.map((row) => ({
+          userId: row.userId,
+          status: row.status,
+          aadhar: (
+            <button
+              className="view-document-button"
+              onClick={() => handleViewDocument(row.aadhar, 'Aadhar')}
+            >
+              View Aadhar
+            </button>
+          ),
+          pan: (
+            <button
+              className="view-document-button"
+              onClick={() => handleViewDocument(row.pan, 'PAN')}
+            >
+              View PAN
+            </button>
+          ),
+          approve: (
+            <button
+              onClick={() => handleApprove(row.userId)}
+              className="approve-button"
+            >
+              Approve
+            </button>
+          ),
+          reject: (
+            <button
+              onClick={() => handleReject(row.userId, notes[row.userId])}
+              className="reject-button"
+            >
+              Reject
+            </button>
+          ),
+          note: (
+            <div className="note-container">
+              <input
+                type="text"
+                placeholder="Add rejection note"
+                onChange={(e) => handleNoteChange(row.userId, e.target.value)}
+                className="rejection-input"
+              />
+            </div>
+          ),
+        }));
+
+        setKycRequests(filteredData);
+
+        setHeaders(['userId', 'status', 'aadhar', 'pan', 'approve', 'reject', 'note']);
         const totalCount = response.headers['x-total-count'] || 0;
         setTotalPages(Math.ceil(totalCount / pageSize));
       } else {
@@ -77,6 +86,7 @@ const KycRequests = () => {
       }
     } catch (error) {
       console.error('Error fetching KYC requests:', error);
+      toast.error('Error fetching KYC requests. Please try again later.');
     }
   };
 
@@ -84,40 +94,46 @@ const KycRequests = () => {
     fetchKYCRequests();
   }, [currentPage, pageSize]);
 
-  // Approve KYC Request
+  const handleViewDocument = (url, type) => {
+    if (url) {
+      console.log(`Opening ${type} URL:`, url);
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } else {
+      toast.error(`${type} document URL is missing.`);
+    }
+  };
+
   const handleApprove = async (userId) => {
     try {
       console.log('Approve clicked for userId:', userId);
       await approveOrRejectKycRequestService(userId, 'approved', null);
-      alert('KYC Request Approved!');
-      fetchKYCRequests(); // Refetch data after approval
+      toast.success('KYC Request Approved!');
+      fetchKYCRequests();
     } catch (error) {
       console.error('Error approving KYC request:', error);
+      toast.error('Failed to approve KYC request. Please try again.');
     }
   };
 
-  // Reject KYC Request
   const handleReject = async (userId, note) => {
     try {
       console.log('handleReject called for userId:', userId);
 
       if (!note || !note.trim()) {
-        note = 'photo not visible'
-        
+        note = 'photo not visible';
       }
 
       console.log('Rejection note:', note);
 
-       
       await approveOrRejectKycRequestService(userId, 'rejected', note);
-      alert('KYC Request Rejected!');
-      fetchKYCRequests(); 
+      toast.success('KYC Request Rejected!');
+      fetchKYCRequests();
     } catch (error) {
       console.error('Error rejecting KYC request:', error);
+      toast.error('Failed to reject KYC request. Please try again.');
     }
   };
 
-   
   const handleNoteChange = (userId, value) => {
     setNotes((prevNotes) => ({
       ...prevNotes,
@@ -125,14 +141,14 @@ const KycRequests = () => {
     }));
   };
 
-  
   const handlePageSizeChange = (size) => {
     setPageSize(size);
-    setCurrentPage(1);  
+    setCurrentPage(1);
   };
 
   return (
     <div className="admin-kyc-requests-container">
+      <ToastContainer />
       <h1>Admin KYC Requests</h1>
 
       <PageSize pageSize={pageSize} onPageSizeChange={handlePageSizeChange} />

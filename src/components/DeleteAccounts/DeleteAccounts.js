@@ -6,6 +6,8 @@ import PageSize from '../../SharedComponents/PageSize/PageSize';
 import getAllAccountsService from '../../services/getAllAccountsService';
 import { selectTableAttribute } from '../../utils/helper/selectTableAttribute';
 import Modal from '../../SharedComponents/Modal/Modal';  
+import { ToastContainer, toast } from 'react-toastify';   
+import 'react-toastify/dist/ReactToastify.css';  
 import './DeleteAccounts.css';
 
 const DeleteAccounts = () => {
@@ -18,7 +20,6 @@ const DeleteAccounts = () => {
   const [showModal, setShowModal] = useState(false);  
   const [accountToDelete, setAccountToDelete] = useState(null); 
 
-   
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,13 +50,13 @@ const DeleteAccounts = () => {
         }
       } catch (error) {
         console.error('Error fetching account data:', error);
+        toast.error('Error fetching account data. Please try again.');
       }
     };
 
     fetchData();
   }, [filters, pageSize, currentPage]);
 
- 
   const handlePageChange = (page) => setCurrentPage(page);
 
   const handlePageSizeChange = (size) => {
@@ -63,41 +64,39 @@ const DeleteAccounts = () => {
     setCurrentPage(1);
   };
 
-   
   const handleFilterChange = (e) => {
     const { value } = e.target;
     setFilters((prevFilters) => ({ ...prevFilters, bankName: value }));
     setCurrentPage(1);
   };
 
-   
   const handleDeleteAccountClick = (accountNumber) => {
     setAccountToDelete(accountNumber); 
     setShowModal(true);  
   };
 
-   
   const handleConfirmDelete = async () => {
     try {
       await deleteAccountService(accountToDelete); 
-      alert('Account deleted successfully!');
+      toast.success('Account deleted successfully!');   
       setShowModal(false);  
-      setCurrentPage(1);  
+      setAccountData((prevData) =>
+        prevData.filter((account) => account.accountNumber !== accountToDelete)
+      );
     } catch (error) {
       console.error('Error deleting account:', error);
-      alert('Failed to delete account. Please try again.');
+      toast.error('Failed to delete account.');  
       setShowModal(false);  
     }
   };
 
-   
   const handleCancelDelete = () => {
     setShowModal(false);  
   };
 
   return (
     <div className="get-accounts-container">
-       
+      <ToastContainer />   
       <div className="filters">
         <label htmlFor="bankName">Bank Name:</label>
         <input
@@ -132,7 +131,6 @@ const DeleteAccounts = () => {
         )}
       </div>
 
-    
       {showModal && (
         <Modal
           onSubmit={handleConfirmDelete}
@@ -140,11 +138,9 @@ const DeleteAccounts = () => {
           closeModal={handleCancelDelete}
           message={"Are you sure you want to delete this account?"}
         >
-          
         </Modal>
       )}
 
-       
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

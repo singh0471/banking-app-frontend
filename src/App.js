@@ -22,11 +22,14 @@ import ViewPassbook from './components/ViewPassbook/ViewPassbook';
 import KYC from './components/KYC/KYC';
 import TransferMoney from './components/TransferMoney/TransferMoney';
 import KycRequests from './components/KycRequests/KycRequests';
+import GetAllBankAccounts from './components/GetAllBankAccounts/GetAllBankAccounts';
+import GetAllUserAccounts from './components/GetAllUserAccounts/GetAllUserAccounts';
 
 
 function App() {
   
     return ( 
+      
       <Routes>
       {/* Homepage Route */}
       <Route path="/" element={<Homepage />} />
@@ -74,7 +77,17 @@ function App() {
           element={<ProtectedRoute role="admin" component={GetAllBanks} />}
         />
 
+        <Route
+          path="get-bank-accounts"
+          element={<ProtectedRoute role="admin" component={GetAllBankAccounts} />}
+        />
+
 <Route
+          path="get-user-accounts"
+          element={<ProtectedRoute role="admin" component={GetAllUserAccounts} />}
+        />
+
+        <Route
           path="kyc-requests"
           element={<ProtectedRoute role="admin" component={KycRequests} />}
         />

@@ -15,7 +15,6 @@ const DefaultDashboardContent = () => {
         <button className="neon-button blue" onClick={()=> {navigation('/admin-dashboard/get-banks')}}>View Bank List</button>
         <button className="neon-button red" onClick={()=> {navigation('/admin-dashboard/delete-bank')}}>Delete Bank</button>
         <button className="neon-button yellow" onClick={()=> {navigation('/admin-dashboard/update-bank')}}>Update Bank Details</button>
-        <button className="neon-button green" onClick={()=> {navigation('/admin-dashboard/get-ledger')}}>View Ledger</button>
         <button className="neon-button purple" onClick={()=> {navigation('/admin-dashboard/create-user')}}>Register New User</button>
         <button className="neon-button orange" onClick={()=> {navigation('/admin-dashboard/get-users')}}>View User List</button>
         <button className="neon-button pink" onClick={()=> {navigation('/admin-dashboard/delete-user')}}>Remove User</button>

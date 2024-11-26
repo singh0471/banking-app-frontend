@@ -1,0 +1,146 @@
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;  
+  justify-content: flex-start;  
+}
+
+ 
+.search-container label {
+  margin-right: 8px;  
+  font-weight: bold;
+  font-size: 0.9rem;  
+  color: #666; 
+}
+
+ 
+.search-container input[type="text"] {
+  padding: 6px 10px;  
+  border: 1.5px solid #999;  
+  border-radius: 4px;  
+  font-size: 0.9rem;  
+  color: #333;  
+  background-color: #f2f2f2;  
+  width: 200px;  
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;  
+}
+
+ 
+.search-container input[type="text"]:focus {
+  border-color: #666;  
+  box-shadow: 0 0 4px #999;  
+  outline: none;  
+}
+
+ 
+.get-bank-accounts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start; 
+  margin: 20px auto;
+  width: 100%;
+}
+
+ 
+.table-container {
+  width: 100%;  
+  overflow-x: auto;  
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+ 
+table {
+  width: 100%;  
+  border-collapse: collapse;  
+  table-layout: auto;  
+}
+
+table th,
+table td {
+  padding: 12px 15px;  
+  text-align: center;  
+  border: 1px solid #ddd;  
+}
+
+ 
+.no-data {
+  display: flex;                   
+  justify-content: center;        
+  align-items: center;             
+  font-size: 1rem;              
+  color: #555;                     
+  text-align: center;              
+  margin: 10px 0;
+}
+
+ 
+.pagination,
+.page-size {
+  margin-top: 10px;
+}
+
+ 
+.view-passbook-button {
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.view-passbook-button:hover {
+  background-color: #0056b3;
+}
+
+ 
+@media (max-width: 768px) {
+  .table-container {
+    width: 100%;
+    padding: 10px;  
+  }
+
+  table th,
+  table td {
+    font-size: 12px;  
+  }
+
+  .view-passbook-button {
+    font-size: 12px;
+  }
+
+ 
+  .search-container {
+    flex-direction: column;  
+    align-items: flex-start;
+  }
+
+  .search-container label,
+  .search-container input[type="text"] {
+    margin-bottom: 5px;
+  }
+
+  .search-container input[type="text"] {
+    width: 100%;  
+  }
+}
+
+.back-to-view-banks-button {
+  margin-bottom: 15px;  
+  padding: 5px 10px;  
+  font-size: 14px;  
+  background-color: #007bff;  
+  color: white;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer; 
+  transition: background-color 0.3s ease;  
+  margin-left: -300px;
+}
+
+.back-to-view-banks-button:hover {
+  background-color: #0056b3;  
+}

@@ -2,29 +2,29 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  align-items: flex-start; /* Align to left */
+  align-items: flex-start;  
   margin: 20px auto;
-  width: 100%; /* Make sure the container takes up 100% width */
+  width: 100%;  
 }
 
 .table-container {
-  width: 100%; /* Ensure the table container is using the full width */
-  overflow-x: auto; /* Allow scrolling if table exceeds container width */
+  width: 100%;  
+  overflow-x: auto; 
   padding: 20px;
   box-sizing: border-box;
 }
 
 table {
-  width: 100%; /* Ensure the table takes full width of its container */
-  border-collapse: collapse; /* Ensure proper spacing and border between cells */
-  table-layout: auto; /* Table adjusts its layout based on content */
+  width: 100%;  
+  border-collapse: collapse;  
+  table-layout: auto;  
 }
 
 table th,
 table td {
-  padding: 12px 15px; /* Add padding for better readability */
-  text-align: center; /* Center the content in the cells */
-  border: 1px solid #ddd; /* Add a border to cells */
+  padding: 12px 15px;  
+  text-align: center;  
+  border: 1px solid #ddd;  
 }
 
 .no-data {
@@ -63,12 +63,12 @@ table td {
 @media (max-width: 768px) {
   .table-container {
     width: 100%;
-    padding: 10px; /* Ensure padding is appropriate for smaller screens */
+    padding: 10px; 
   }
 
   table th,
   table td {
-    font-size: 12px; /* Adjust font size for smaller screens */
+    font-size: 12px;  
   }
 
   .view-passbook-button {

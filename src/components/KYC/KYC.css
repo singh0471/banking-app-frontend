@@ -1,133 +1,181 @@
-/* KYC Component Styles */
+/* General Container */
 .kyc-container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Back Button */
+.back-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  text-decoration: none;
+  border: none;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+/* Upload Section */
+.upload-section {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px; /* Space between the buttons */
+}
+
+.upload-button,
+.view-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  border: none;
+  font-size: 14px;
+}
+
+.upload-button:hover,
+.view-button:hover {
+  background-color: #45a049;
+}
+
+/* Modal Styles */
+/* Modal Styles */
+/* Modal Overlay */
+/* Modal Overlay */
+/* Modal Overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+  z-index: 1000; /* Ensure it stays above all other elements */
+  backdrop-filter: blur(8px); /* Apply full blur effect to the background */
+  -webkit-backdrop-filter: blur(8px); /* For Safari support */
+}
+
+/* Modal Content Centering */
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Close Button */
+.close-button {
+  font-size: 24px;
+  font-weight: bold;
+  color: #555;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.close-button:hover {
+  color: red;
+}
+
+/* Fade-In Animation for Modal */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
-  
-  .back-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    text-decoration: none;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  
-  .back-button:hover {
-    background-color: #0056b3;
+}
+
+
+/* View Modal Buttons */
+.view-modal-button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.view-modal-button:hover {
+  background-color: #005f73;
+}
+
+/* KYC Status Table */
+.kyc-status {
+  margin-bottom: 20px;
+}
+
+.kyc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.kyc-table th,
+.kyc-table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.kyc-table th {
+  background-color: #008080;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.kyc-table td {
+  color: #4A4A4A;
+  font-size: 13px;
+  background-color: #F5FFFA;
+}
+
+/* Table Hover Effect */
+.kyc-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
-  
-  .kyc-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
+}
+
   
-  .kyc-status {
-    margin-bottom: 20px;
-  }
-  
-  .kyc-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  /* General Table Header and Column Styling */
-  .kyc-table th, .kyc-table td {
-    padding: 12px;
-    text-align: center;
-    border: 1px solid #ddd;
-  }
-  
-  /* Table Header Styling */
-  .kyc-table th {
-    background-color: #008080;  /* Match standard table header color */
-    color: white;  /* White text on the header */
-    font-weight: bold;
-    text-transform: capitalize;
-    font-size: 14px;
-    white-space: nowrap;
-  }
-  
-  /* Table Column Styling */
-  .kyc-table td {
-    color: #4A4A4A;  /* Darker text color for better visibility */
-    font-size: 13px;
-    background-color: #F5FFFA;  /* Match standard table column background */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;  /* Add ellipsis for overflowed content */
-  }
-  
-  /* Styling for even and odd rows */
-  .kyc-table tr:nth-child(even) {
-    background-color: #E8F5F5;  /* Slightly lighter background for even rows */
-  }
-  
-  .kyc-table tr:nth-child(odd) {
-    background-color: #F5FFFA;  /* Slightly lighter background for odd rows */
-  }
-  
-  /* Hover effect on rows */
-  .kyc-table tr:hover {
-    background-color: #DFF5F5;  /* Hover background color */
-    cursor: pointer;
-  }
-  
-  /* KYC Document Section */
-  .kyc-document {
-    margin-bottom: 20px;
-  }
-  
-  .kyc-image {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Upload Section */
-  .upload-section {
-    margin-top: 20px;
-  }
-  
-  .upload-button {
-    background-color: #28a745;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .upload-button:hover {
-    background-color: #218838;
-  }
-  
-  /* File Input Styling */
-  input[type="file"] {
-    margin-top: 10px;
-    color: gray;
-  }
-  
-  h2, h4 {
-    color: #333;  /* Darker text for headers */
-  }
-  
-  h3, p {
-    color: #555;  /* Slightly lighter for general text */
-  }
-  
-  /* Style for empty admin note section */
-  .kyc-status td {
-    color: #777; /* Gray for empty values */
-  }
-  
+

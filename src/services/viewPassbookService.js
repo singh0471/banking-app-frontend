@@ -6,9 +6,9 @@ async function viewPassbookService(accountNumber, { page, limit, filters }) {
   try {
    
     const token = localStorage.getItem('token');
-    console.log(token)
+     
     const userId =  await jwtDecode(token.split(" ")[1]).userId;
-    console.log(userId)
+     console.log("filters ",filters);
      
     const response = await axios.get(`http://localhost:4000/api/v1/user/${userId}/account/${accountNumber}/passbook`, {
       params: {

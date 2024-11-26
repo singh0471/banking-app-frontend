@@ -23,12 +23,7 @@ const UserDashboard = () => {
           </div>
           
           <div className="dropdown">
-            <button className="nav-button">Transactions</button>
-            <div className="dropdown-content">
-              <button onClick={() => navigate('/user-dashboard/withdraw')} className="dropdown-item">Withdraw</button>
-              <button onClick={() => navigate('/user-dashboard/deposit')} className="dropdown-item">Deposit</button>
-              <button onClick={() => navigate('/user-dashboard/transfer')} className="dropdown-item">Transfer</button>
-            </div>
+            <button className="nav-button" onClick={() => navigate('/user-dashboard/transfer-money')}>Transfer Money</button>
           </div>
 
           <button className="nav-button" onClick={() => navigate('/user-dashboard/kyc')}>KYC</button>
